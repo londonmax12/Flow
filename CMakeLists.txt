@@ -4,19 +4,25 @@ project("Flow")
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable("Example"
-    "Example/src/main.cpp"
+add_executable("Example-OpenGL" WIN32
+    "Example-OpenGL/src/main.cpp"
+    "Example-OpenGL/middleware/glad/include/glad/glad.h"
+    "Example-OpenGl/middleware/glad/src/glad.c"
+    "${PROJECT_NAME}/include/impl/flow_opengl_impl.h"
+    "${PROJECT_NAME}/src/impl/flow_opengl_impl.cpp"			
 )
 
-target_include_directories("Example" PRIVATE ${PROJECT_NAME}/include)
+target_include_directories("Example-OpenGL" PRIVATE ${PROJECT_NAME}/include)
+target_include_directories("Example-OpenGL" PRIVATE "Example-OpenGL/middleware/glad/include")
 
 add_library("${PROJECT_NAME}"
     "${PROJECT_NAME}/src/flow.cpp"
+    "${PROJECT_NAME}/include/flow_renderer.h" 
     "${PROJECT_NAME}/include/flow.h"
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}/include)
 
-target_link_libraries("Example" ${PROJECT_NAME})
+target_link_libraries("Example-OpenGL" ${PROJECT_NAME})
 
-set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT "Example")
+set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT "Example-OpenGL")
