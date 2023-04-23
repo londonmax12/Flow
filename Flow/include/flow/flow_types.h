@@ -9,6 +9,10 @@ namespace Flow {
 		Vector2Int() = default;
 		Vector2Int(int X, int Y) 
 			: x(X), y(Y) { }
+
+		Vector2Int operator+ (Vector2Int const &obj) {
+			return { x + obj.x, y + obj.y };
+		}
 	};
 
 	struct Color {

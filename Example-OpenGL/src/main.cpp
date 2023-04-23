@@ -89,8 +89,12 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
             Flow::BeginFrame();
 
             Flow::FlowContext::GetInstance()->GetRenderer()->DrawRect({ 20, 20 }, { 60, 60 }, { 1.f, 0.f, 0.f, 1.f });
-            Flow::BeginWindow("Hello World!");
-
+            if(Flow::BeginWindow("Hello World!"))
+            {
+                bool temp = true;
+                Flow::Checkbox("Test", temp);
+            }
+            Flow::EndWindow();
             Flow::EndFrame();
 
             SwapBuffers(hDC);
