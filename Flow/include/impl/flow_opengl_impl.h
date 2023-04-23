@@ -20,6 +20,8 @@ namespace Flow {
         void EndFrame() override;
         void Shutdown() override;
 
+        Vertex VertexPixelsToCoords(Vertex v) override;
+
     private:
         void CreateBuffers();
 

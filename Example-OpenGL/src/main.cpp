@@ -61,26 +61,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     }
     if (!wglMakeCurrent(hDC, hRC)) {
         return -1;
-    }
-    
-    // TODO: Remove temp code
-    Flow::Vertex vertices[] = {
-        { -0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f },
-        { 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f },
-        { 0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f },
-        { -0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f }
-    };
-    int indices[] = {
-        0, 1, 2,
-        2, 3, 0
-    };
-    Flow::RenderPacket packet;
-    packet.vertices = vertices;
-    packet.verticesSize = sizeof(vertices) / sizeof(vertices[0]);
-    packet.indices = indices;
-    packet.indicesSize = sizeof(indices) / sizeof(indices[0]);
+    }  
 
     Flow::FlowOpenGLImpl::Init();
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    glDisable(GL_DEPTH_TEST);
 
     while (true) {
         MSG msg = {};
@@ -96,7 +84,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
             glClear(GL_COLOR_BUFFER_BIT);
 
             Flow::BeginFrame();
-            Flow::FlowContext::GetInstance()->GetRenderer()->Submit(packet);
+            Flow::FlowContext::GetInstance()->GetRenderer()->DrawRect({ 20, 20 }, { 60, 60 }, { 1.f, 0.f, 0.f, 1.f });
+            Flow::FlowContext::GetInstance()->GetRenderer()->DrawRect({ 50, 50 }, { 70, 70 }, { 0.2f, 0.2f, 0.23f, 0.9f });
             Flow::EndFrame();
 
             SwapBuffers(hDC);

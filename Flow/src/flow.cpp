@@ -7,6 +7,8 @@ bool Flow::FlowContext::Init()
 
     m_Instance = new FlowContext();
 
+    m_Instance->m_Renderer = new Renderer();
+
     return true;
 }
 
@@ -27,14 +29,9 @@ Flow::FlowContext * Flow::FlowContext::GetInstance()
     return m_Instance;
 }
 
-Flow::RendererBackend* Flow::FlowContext::GetRenderer()
+Flow::Renderer* Flow::FlowContext::GetRenderer()
 {
     return m_Renderer;
-}
-
-void Flow::FlowContext::_SetRenderer(RendererBackend* renderer)
-{
-    m_Renderer = renderer;
 }
 
 bool Flow::BeginFrame()
@@ -42,7 +39,7 @@ bool Flow::BeginFrame()
     if (!FlowContext::GetInstance())
         return false;
 
-    if (!FlowContext::GetInstance()->GetRenderer())
+    if (FlowContext::GetInstance()->GetRenderer())
         FlowContext::GetInstance()->GetRenderer()->BeginFrame();
 }
 
@@ -51,6 +48,6 @@ void Flow::EndFrame()
     if (!FlowContext::GetInstance())
         return;
 
-    if (!FlowContext::GetInstance()->GetRenderer())
+    if (FlowContext::GetInstance()->GetRenderer())
         FlowContext::GetInstance()->GetRenderer()->EndFrame();
 }

@@ -12,14 +12,12 @@ namespace Flow {
 
 		static FlowContext* GetInstance();
 
-		RendererBackend* GetRenderer();
-
-		void _SetRenderer(RendererBackend* renderer);
+		Renderer* GetRenderer();
 
 	private:
 		inline static FlowContext* m_Instance = nullptr;
 
-		RendererBackend* m_Renderer;
+		Renderer* m_Renderer = nullptr;
 	};
 
 	bool BeginFrame();

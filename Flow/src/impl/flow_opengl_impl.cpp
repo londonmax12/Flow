@@ -71,6 +71,10 @@ namespace Flow {
     }
 
     void OpenGLRenderer::BeginFrame() {
+        GLint viewport[4];
+
+        glGetIntegerv(GL_VIEWPORT, viewport);
+        m_ScreenSize = { viewport[2], viewport[3] };
     }
 
     void OpenGLRenderer::Submit(RenderPacket packet) {
@@ -102,11 +106,24 @@ namespace Flow {
     }
 
     void OpenGLRenderer::EndFrame() { }
+
     void OpenGLRenderer::Shutdown() {
         if (m_ShaderProgram)
             glDeleteProgram(m_ShaderProgram);
     }
-     
+
+    Vertex OpenGLRenderer::VertexPixelsToCoords(Vertex v)
+    {
+        Vertex vertex = v;
+
+        float aspectRatio = m_ScreenSize.x / m_ScreenSize.y;
+        vertex.x = (v.x / m_ScreenSize.x) * 2.0f - 1.0f;
+        vertex.y = (v.y / m_ScreenSize.y) * 2.0f - 1.0f;
+        vertex.y *= -1.0f;
+
+        return vertex;
+    }
+
     void OpenGLRenderer::CreateBuffers()
     {
         glGenVertexArrays(1, &m_Vao);
@@ -128,8 +145,7 @@ namespace Flow {
 
         Flow::OpenGLRenderer* renderer = new Flow::OpenGLRenderer();
         renderer->Init();
-
-        FlowContext::GetInstance()->_SetRenderer(renderer);
+        FlowContext::GetInstance()->GetRenderer()->_SetBackend(renderer);
 
         return false;
     }

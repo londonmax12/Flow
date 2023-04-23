@@ -16,9 +16,11 @@ target_include_directories("Example-OpenGL" PRIVATE ${PROJECT_NAME}/include)
 target_include_directories("Example-OpenGL" PRIVATE "Example-OpenGL/middleware/glad/include")
 
 add_library("${PROJECT_NAME}"
-    "${PROJECT_NAME}/src/flow.cpp"
-    "${PROJECT_NAME}/include/flow_renderer.h" 
     "${PROJECT_NAME}/include/flow.h"
+    "${PROJECT_NAME}/include/flow_types.h"
+    "${PROJECT_NAME}/include/flow_renderer.h" 
+    "${PROJECT_NAME}/src/flow.cpp"
+    "${PROJECT_NAME}/src/flow_renderer.cpp"
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_NAME}/include)
