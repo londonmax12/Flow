@@ -1,8 +1,8 @@
 // Example of a Windows OpenGL window using Flow
 #pragma comment(lib, "opengl32.lib")
 
-#include "flow.h"
-#include "impl/flow_opengl_impl.h"
+#include "flow/flow.h"
+#include "flow/impl/flow_opengl_impl.h"
 
 #include <Windows.h>
 #include <GL/gl.h>
@@ -63,12 +63,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return -1;
     }  
 
-    Flow::FlowOpenGLImpl::Init();
+    gladLoadGL();
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glDisable(GL_DEPTH_TEST);
+
+    // Initialize Flow
+    Flow::FlowOpenGLImpl::Init();
 
     while (true) {
         MSG msg = {};
@@ -84,17 +87,17 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
             glClear(GL_COLOR_BUFFER_BIT);
 
             Flow::BeginFrame();
+
             Flow::FlowContext::GetInstance()->GetRenderer()->DrawRect({ 20, 20 }, { 60, 60 }, { 1.f, 0.f, 0.f, 1.f });
-            Flow::FlowContext::GetInstance()->GetRenderer()->DrawRect({ 50, 50 }, { 70, 70 }, { 0.2f, 0.2f, 0.23f, 0.9f });
+            Flow::BeginWindow("Hello World!");
+
             Flow::EndFrame();
 
             SwapBuffers(hDC);
         }
     }
 
-    wglMakeCurrent(NULL, NULL);
     wglDeleteContext(hRC);
-    ReleaseDC(hWnd, hDC);
     DestroyWindow(hWnd);
 
     return 0;

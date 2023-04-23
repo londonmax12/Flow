@@ -1,5 +1,5 @@
-#include "impl/flow_opengl_impl.h"
-#include "flow.h"
+#include "flow/impl/flow_opengl_impl.h"
+#include "flow/flow.h"
 
 #include <stddef.h>
 #include <iostream>
@@ -9,8 +9,6 @@ namespace Flow {
         if (!FlowContext::GetInstance()) {
             std::cerr << "Flow: Failed to initialize renderer: Flow is not initialized" << std::endl;
         }
-
-        gladLoadGL();
 
         CreateBuffers();
 

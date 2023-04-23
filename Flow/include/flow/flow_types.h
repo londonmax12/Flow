@@ -10,6 +10,7 @@ namespace Flow {
 		Vector2Int(int X, int Y) 
 			: x(X), y(Y) { }
 	};
+
 	struct Color {
 		float r;
 		float g;
