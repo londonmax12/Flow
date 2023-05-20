@@ -5,15 +5,15 @@ project("Flow")
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable("Example-OpenGL" WIN32
-    "Example-OpenGL/src/main.cpp"
-    "Example-OpenGL/middleware/glad/include/glad/glad.h"
-    "Example-OpenGl/middleware/glad/src/glad.c"
+    "Examples/opengl/src/main.cpp"
+    "Examples/opengl/middleware/glad/include/glad/glad.h"
+    "Examples/opengl/middleware/glad/src/glad.c"
     "${PROJECT_NAME}/include/flow/impl/flow_opengl_impl.h"
     "${PROJECT_NAME}/src/impl/flow_opengl_impl.cpp"
 )
 
 target_include_directories("Example-OpenGL" PRIVATE ${PROJECT_NAME}/include)
-target_include_directories("Example-OpenGL" PRIVATE "Example-OpenGL/middleware/glad/include")
+target_include_directories("Example-OpenGL" PRIVATE "Examples/opengl/middleware/glad/include")
 
 add_library("${PROJECT_NAME}"
     "${PROJECT_NAME}/include/flow/flow.h"
