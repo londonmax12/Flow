@@ -7,7 +7,7 @@
 namespace Flow {
     class FlowOpenGLImpl {
     public:
-        static bool Init();
+        static bool Init    ();
     };
 
     class OpenGLRenderer : public RendererBackend {

@@ -10,6 +10,8 @@ bool Flow::FlowContext::Init()
     m_Instance = new FlowContext();
 
     m_Instance->m_Renderer = new Renderer();
+    m_Instance->m_FontRenderer = new FontRenderer();
+
     UIWidget::Init(m_Instance->m_Renderer);
 
     return true;
@@ -39,6 +41,11 @@ Flow::FlowContext * Flow::FlowContext::GetInstance()
 Flow::Renderer* Flow::FlowContext::GetRenderer()
 {
     return m_Renderer;
+}
+
+Flow::FontRenderer* Flow::FlowContext::GetFontRenderer()
+{
+    return m_FontRenderer;
 }
 
 void Flow::FlowContext::BeginFrame()

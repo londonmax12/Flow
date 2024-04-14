@@ -72,6 +72,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     // Initialize Flow
     Flow::FlowOpenGLImpl::Init();
+    Flow::FlowContext::GetInstance()->GetFontRenderer()->LoadTTFFont("C:\\Windows\\Fonts\\Arial.ttf");
 
     while (true) {
         MSG msg = {};

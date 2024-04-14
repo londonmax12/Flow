@@ -1,11 +1,11 @@
 #pragma once
 
-#include <xhash>
 #include <unordered_map>
 #include <stack>
 
 #include "flow/flow_widgets.h"
 #include "flow/flow_renderer.h"
+#include "flow/flow_text_renderer.h"
 
 namespace Flow {
 	class FlowContext {
@@ -16,6 +16,7 @@ namespace Flow {
 		static FlowContext* GetInstance();
 
 		Renderer* GetRenderer();
+		FontRenderer* GetFontRenderer();
 
 		void BeginFrame();
 		void EndFrame();
@@ -33,6 +34,7 @@ namespace Flow {
 		inline static FlowContext* m_Instance = nullptr;
 
 		Renderer* m_Renderer = nullptr;
+		FontRenderer* m_FontRenderer = nullptr;
 
 		std::stack<UIWidget*> m_FrameStack;
 
